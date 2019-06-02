@@ -4,12 +4,31 @@ using UnityEngine;
 
 public class ButtonLeft : MonoBehaviour {
 
-    static private int speed = 20;
-    public Transform Hero;
+    static private int speed = 10;
+    public Transform player;
+    Vector3 posPlayer;
+    private bool OnMouseDrag_ = false; 
+    public void Start()
+    {
+        
+    }
+    public void Update()
+    {
+        if (OnMouseDrag_ == true)
+        {
+            player.transform.position += Vector3.left * speed * Time.deltaTime;
+        }
+    }
 
+    
     public void OnMouseDrag()
     {
-        Vector3 position = Hero.position;
-        Hero.position = Vector2.MoveTowards(Hero.position, new Vector2(position.x, position.y), speed * Time.deltaTime);
+        OnMouseDrag_ = true;
+        player.transform.Rotate(Vector3.left);
+          
+    }
+    public void OnMouseUp()
+    {
+        OnMouseDrag_ = false;
     }
 }
